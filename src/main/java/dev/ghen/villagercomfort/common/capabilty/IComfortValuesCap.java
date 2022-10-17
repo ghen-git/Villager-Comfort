@@ -18,6 +18,9 @@ public interface IComfortValuesCap
     void setWorkstationsCount(int workstationsCount);
     int getWorkplaceLight();
     void setWorkplaceLight(int workplaceLight);
+    int getOutsideSeconds();
+    void setOutsideSeconds(int outsideSeconds);
+    void addOutsideSeconds(int outsideSeconds);
 
 
     CompoundTag serializeNBT();

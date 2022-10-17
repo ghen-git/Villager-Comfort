@@ -11,6 +11,7 @@ public class ComfortValuesCap implements IComfortValuesCap
     private int workplaceSize;
     private int workstationsCount;
     private int workplaceLight;
+    private int outsideSeconds;
 
     @Override
     public int getBedroomSize()
@@ -33,6 +34,10 @@ public class ComfortValuesCap implements IComfortValuesCap
         nbt.putInt("bedsCount", bedsCount);
         nbt.putInt("bedroomLight", bedroomLight);
         nbt.putBoolean("isWorkstationInBedroom", isWorkstationInBedroom);
+        nbt.putInt("workplaceSize", workplaceSize);
+        nbt.putInt("workstationsCount", workstationsCount);
+        nbt.putInt("workplaceLight", workplaceLight);
+        nbt.putInt("outsideSeconds", outsideSeconds);
 
         return nbt;
     }
@@ -44,6 +49,10 @@ public class ComfortValuesCap implements IComfortValuesCap
         bedsCount = tag.getInt("bedsCount");
         bedroomLight = tag.getInt("bedroomLight");
         isWorkstationInBedroom = tag.getBoolean("isWorkstationInBedroom");
+        workplaceSize = tag.getInt("workplaceSize");
+        workstationsCount = tag.getInt("workstationsCount");
+        workplaceLight = tag.getInt("workplaceLight");
+        outsideSeconds = tag.getInt("outsideSeconds");
     }
 
     @Override
@@ -114,5 +123,23 @@ public class ComfortValuesCap implements IComfortValuesCap
     public void setWorkplaceLight(int workplaceLight)
     {
         this.workplaceLight = workplaceLight;
+    }
+
+    @Override
+    public int getOutsideSeconds()
+    {
+        return outsideSeconds;
+    }
+
+    @Override
+    public void setOutsideSeconds(int outsideSeconds)
+    {
+        this.outsideSeconds = outsideSeconds;
+    }
+
+    @Override
+    public void addOutsideSeconds(int outsideSeconds)
+    {
+        this.outsideSeconds += outsideSeconds;
     }
 }

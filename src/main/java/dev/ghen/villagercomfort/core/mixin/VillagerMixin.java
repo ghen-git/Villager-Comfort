@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.LightLayer;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,6 +45,20 @@ public class VillagerMixin
         villager.getCapability(ModCapabilities.COMFORT_VALUES_CAP).ifPresent(cap ->
                 WorkplaceComfortValues.setValuesToCap(villager, cap));
     }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void checkSunlightTick(CallbackInfo ci)
+    {
+        Villager villager = ((Villager)(Object)this);
+
+        if(!villager.level.isClientSide() && (villager.tickCount % 20 == 0)
+                && villager.level.getBrightness(LightLayer.SKY, villager.blockPosition()) == 15)
+        {
+            villager.getCapability(ModCapabilities.COMFORT_VALUES_CAP).ifPresent(cap ->
+                    cap.addOutsideSeconds(1));
+        }
+    }
+
 
     /**
      * Applies the comfort modifier to the villager's trades
