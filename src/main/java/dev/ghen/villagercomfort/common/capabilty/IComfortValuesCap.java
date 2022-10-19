@@ -21,6 +21,16 @@ public interface IComfortValuesCap
     int getOutsideSeconds();
     void setOutsideSeconds(int outsideSeconds);
     void addOutsideSeconds(int outsideSeconds);
+    int getDaysWithoutOutside();
+    void setDaysWithoutOutside(int daysWithoutOutside);
+    void addDaysWithoutOutside(int daysWithoutOutside);
+    int getDaysWithoutZombie();
+    void setDaysWithoutZombie(int daysWithoutZombie);
+    void addDaysWithoutZombie(int daysWithoutZombie);
+    int getBedWorkstationDistance();
+    void setBedWorkstationDistance(int bedWorkstationDistance);
+    int getComfort();
+    void setComfort(int comfort);
 
 
     CompoundTag serializeNBT();

@@ -1,5 +1,6 @@
 package dev.ghen.villagercomfort.comfort;
 
+import com.mojang.math.Vector3d;
 import dev.ghen.villagercomfort.common.capabilty.IComfortValuesCap;
 import dev.ghen.villagercomfort.core.config.CommonConfig;
 import dev.ghen.villagercomfort.room.RoomHelper;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,7 +29,7 @@ public class BedroomComfortValues
         AtomicInteger maxLightValue = new AtomicInteger(0);
         AtomicBoolean isWorkstationInBedroom = new AtomicBoolean(false);
 
-        RoomHelper.runForEveryBlock(villager.level, bedPos, CommonConfig.MAX_BEDROOM_SIZE.get().intValue(), (pos) ->
+        RoomHelper.runForEveryBlock(villager.level, bedPos, CommonConfig.MAX_BEDROOM_DIAMETER.get().intValue(), (pos) ->
         {
             if(workstation != null && pos.equals(workstation.pos()))
             {
@@ -50,11 +52,15 @@ public class BedroomComfortValues
             }
         });
 
+        if(workstation != null)
+        {
+            int blockDistance = (int) bedPos.distSqr(workstation.pos());
+            comfortValuesCap.setBedWorkstationDistance(blockDistance);
+        }
+
         comfortValuesCap.setBedroomSize(roomSize.get());
         comfortValuesCap.setBedsCount(bedsCount.get() / 2);
         comfortValuesCap.setBedroomLight(maxLightValue.get());
         comfortValuesCap.setIsWorkstationInBedroom(isWorkstationInBedroom.get());
     }
-
-
 }

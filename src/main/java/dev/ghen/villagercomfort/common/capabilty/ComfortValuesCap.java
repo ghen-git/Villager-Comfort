@@ -12,6 +12,10 @@ public class ComfortValuesCap implements IComfortValuesCap
     private int workstationsCount;
     private int workplaceLight;
     private int outsideSeconds;
+    private int daysWithoutOutside;
+    private int daysWithoutZombie;
+    private int bedWorkstationDistance;
+    private int comfort;
 
     @Override
     public int getBedroomSize()
@@ -38,6 +42,10 @@ public class ComfortValuesCap implements IComfortValuesCap
         nbt.putInt("workstationsCount", workstationsCount);
         nbt.putInt("workplaceLight", workplaceLight);
         nbt.putInt("outsideSeconds", outsideSeconds);
+        nbt.putInt("daysWithoutOutside", daysWithoutOutside);
+        nbt.putInt("daysWithoutZombie", daysWithoutZombie);
+        nbt.putInt("bedWorkstationDistance", bedWorkstationDistance);
+        nbt.putInt("comfort", comfort);
 
         return nbt;
     }
@@ -53,6 +61,10 @@ public class ComfortValuesCap implements IComfortValuesCap
         workstationsCount = tag.getInt("workstationsCount");
         workplaceLight = tag.getInt("workplaceLight");
         outsideSeconds = tag.getInt("outsideSeconds");
+        daysWithoutOutside = tag.getInt("daysWithoutOutside");
+        daysWithoutZombie = tag.getInt("daysWithoutZombie");
+        bedWorkstationDistance = tag.getInt("bedWorkstationDistance");
+        comfort = tag.getInt("comfort");
     }
 
     @Override
@@ -141,5 +153,65 @@ public class ComfortValuesCap implements IComfortValuesCap
     public void addOutsideSeconds(int outsideSeconds)
     {
         this.outsideSeconds += outsideSeconds;
+    }
+
+    @Override
+    public int getDaysWithoutZombie()
+    {
+        return daysWithoutZombie;
+    }
+
+    @Override
+    public void setDaysWithoutZombie(int daysWithoutZombie)
+    {
+        this.daysWithoutZombie = daysWithoutZombie;
+    }
+
+    @Override
+    public void addDaysWithoutZombie(int daysWithoutZombie)
+    {
+        this.daysWithoutZombie += daysWithoutZombie;
+    }
+
+    @Override
+    public int getBedWorkstationDistance()
+    {
+        return bedWorkstationDistance;
+    }
+
+    @Override
+    public void setBedWorkstationDistance(int bedWorkstationDistance)
+    {
+        this.bedWorkstationDistance = bedWorkstationDistance;
+    }
+
+    @Override
+    public int getComfort()
+    {
+        return comfort;
+    }
+
+    @Override
+    public void setComfort(int comfort)
+    {
+        this.comfort = comfort;
+    }
+
+    @Override
+    public int getDaysWithoutOutside()
+    {
+        return daysWithoutOutside;
+    }
+
+    @Override
+    public void setDaysWithoutOutside(int daysWithoutOutside)
+    {
+        this.daysWithoutOutside = daysWithoutOutside;
+    }
+
+    @Override
+    public void addDaysWithoutOutside(int daysWithoutOutside)
+    {
+        this.daysWithoutOutside += daysWithoutOutside;
     }
 }
