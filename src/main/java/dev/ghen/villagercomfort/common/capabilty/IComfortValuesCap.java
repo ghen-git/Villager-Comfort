@@ -4,6 +4,10 @@ import net.minecraft.nbt.CompoundTag;
 
 public interface IComfortValuesCap
 {
+    boolean hasBed();
+    void setHasBed(boolean hasBed);
+    boolean hasWorkplace();
+    void setHasWorkplace(boolean hasWorkplace);
     int getBedroomSize();
     void setBedroomSize(int value);
     int getBedsCount();

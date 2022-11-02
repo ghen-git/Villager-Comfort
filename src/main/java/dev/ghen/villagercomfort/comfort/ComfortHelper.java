@@ -16,13 +16,15 @@ public class ComfortHelper
         int comfort = getVillagerComfort(villager);
         int finalPriceDiff = 0;
 
+        float maxComfortInfluence = (100 * (1.0f / CommonConfig.COMFORT_INFLUENCE_ON_PRICE.get().floatValue()));
+
         if(comfort > 0)
         {
-            finalPriceDiff = -MathHelper.scale(comfort, 100, basePrice);
+            finalPriceDiff = -MathHelper.scale(comfort, (int) maxComfortInfluence, basePrice);
         }
         else
         {
-            finalPriceDiff = MathHelper.scale(comfort, -100, 64 - basePrice);
+            finalPriceDiff = MathHelper.scale(comfort, (int) -maxComfortInfluence, 64 - basePrice);
         }
 
         return finalPriceDiff;
@@ -37,7 +39,7 @@ public class ComfortHelper
             int comfort = 0;
 
             //bedroom related
-            if(villager.getBrain().hasMemoryValue(MemoryModuleType.LAST_SLEPT))
+            if(cap.hasBed())
             {
                 // bedroom size
                 if(cap.getBedroomSize() >= CommonConfig.MAX_BEDROOM_SIZE.get().intValue())
@@ -77,7 +79,7 @@ public class ComfortHelper
             }
 
             //workplace related
-            if(villager.getBrain().hasMemoryValue(MemoryModuleType.JOB_SITE))
+            if(cap.hasWorkplace())
             {
                 // workplace size
                 if(cap.getWorkplaceSize() >= CommonConfig.MAX_WORKPLACE_SIZE.get().intValue())
@@ -113,8 +115,7 @@ public class ComfortHelper
             }
 
             // distance between a villager's bed and their workplace
-            if(villager.getBrain().hasMemoryValue(MemoryModuleType.LAST_SLEPT) &&
-                    villager.getBrain().hasMemoryValue(MemoryModuleType.JOB_SITE))
+            if(cap.hasBed() && cap.hasWorkplace())
             {
                 if(cap.getBedWorkstationDistance() > CommonConfig.MAX_BED_WORKPLACE_DISTANCE.get().intValue())
                 {
