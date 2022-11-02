@@ -45,6 +45,10 @@ public class VillagerMixin
                         cap.setDaysWithoutOutside(0);
 
                     cap.setOutsideSeconds(0);
+
+                    cap.setHasBed(true);
+                    if(cap.hasWorkplace())
+                        cap.setHasWorkplace(villager.getBrain().hasMemoryValue(MemoryModuleType.JOB_SITE));
                 });
     }
 
@@ -57,7 +61,12 @@ public class VillagerMixin
         Villager villager = ((Villager)(Object)this);
 
         villager.getCapability(ModCapabilities.COMFORT_VALUES_CAP).ifPresent(cap ->
-                WorkplaceComfortValues.setValuesToCap(villager, cap));
+        {
+            WorkplaceComfortValues.setValuesToCap(villager, cap);
+
+            if(!cap.hasWorkplace())
+                cap.setHasWorkplace(true);
+        });
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

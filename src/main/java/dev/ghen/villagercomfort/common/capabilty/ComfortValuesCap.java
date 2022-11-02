@@ -4,6 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 
 public class ComfortValuesCap implements IComfortValuesCap
 {
+    private boolean hasBed = false;
+    private boolean hasWorkplace = false;
     private int bedroomSize;
     private int bedsCount;
     private int bedroomLight;
@@ -34,6 +36,9 @@ public class ComfortValuesCap implements IComfortValuesCap
     {
         CompoundTag nbt = new CompoundTag();
 
+        nbt.putBoolean("hasBed", hasBed);
+        nbt.putBoolean("hasWorkplace", hasWorkplace);
+        nbt.putInt("bedroomSize", bedroomSize);
         nbt.putInt("bedroomSize", bedroomSize);
         nbt.putInt("bedsCount", bedsCount);
         nbt.putInt("bedroomLight", bedroomLight);
@@ -53,6 +58,8 @@ public class ComfortValuesCap implements IComfortValuesCap
     @Override
     public void deserializeNBT(CompoundTag tag)
     {
+        hasBed = tag.getBoolean("hasBed");
+        hasWorkplace = tag.getBoolean("hasWorkplace");
         bedroomSize = tag.getInt("bedroomSize");
         bedsCount = tag.getInt("bedsCount");
         bedroomLight = tag.getInt("bedroomLight");
@@ -213,5 +220,23 @@ public class ComfortValuesCap implements IComfortValuesCap
     public void addDaysWithoutOutside(int daysWithoutOutside)
     {
         this.daysWithoutOutside += daysWithoutOutside;
+    }
+
+    public boolean hasBed() {
+        return hasBed;
+    }
+
+    @Override
+    public void setHasBed(boolean hasBed) {
+        this.hasBed = hasBed;
+    }
+
+    public boolean hasWorkplace() {
+        return hasWorkplace;
+    }
+
+    @Override
+    public void setHasWorkplace(boolean hasWorkplace) {
+        this.hasWorkplace = hasWorkplace;
     }
 }

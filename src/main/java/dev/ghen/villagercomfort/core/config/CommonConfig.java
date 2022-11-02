@@ -8,6 +8,7 @@ public class CommonConfig
 {
     private static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+    public static final ForgeConfigSpec.ConfigValue<Number> COMFORT_INFLUENCE_ON_PRICE;
     public static final ForgeConfigSpec.ConfigValue<Number> MAX_BEDROOM_DIAMETER;
     public static final ForgeConfigSpec.ConfigValue<Number> MAX_WORKPLACE_DIAMETER;
 
@@ -47,6 +48,12 @@ public class CommonConfig
 
     static
     {
+        BUILDER.push("Prices");
+        COMFORT_INFLUENCE_ON_PRICE = BUILDER.comment("Value from 0 to 1, influences how much price changes relative to a villager's comfort",
+                "for example, if the value is 0.5, the base price is 8 emeralds, and comfort is at its max, the new price will be 4 emeralds",
+                "if the value was 1.0 instead, the price for a villager at max. comfort would be 1 emerald").define("comfortInfluenceOnPrice", 0.8);
+        BUILDER.pop();
+
         BUILDER.push("Interiors dimensions").comment("Values relative to the size of the different rooms villagers usually spend time in,",
                 "mind that the bigger this values get, the more imprecise evaluations may be (i.e if you have a wide opening to a courtyard",
                 "without any blocks to separate it from the inside, the courtyard will be included in the calculations.",
